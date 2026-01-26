@@ -8,43 +8,49 @@ NeuroLink AI is a conceptual landing page for a next-generation neural interface
 
 - **HTML5** - Semantic markup and structure
 - **CSS3** - Advanced styling with animations, gradients, and grid/flexbox layouts
+- **JavaScript (Vanilla)** - Smooth scrolling and scroll-triggered reveal animations
 - **Modern Web Standards** - Responsive design, CSS custom properties, and transform animations
 
 ## Features
 
-1. **Animated Hero Section** - Eye-catching floating orbs with smooth animations and gradient text effects that create a sense of depth and motion
-2. **Interactive Feature Cards** - Hover effects with glow animations and smooth transitions that respond to user interaction
-3. **Responsive Grid Layouts** - Fully responsive design using CSS Grid and Flexbox that adapts seamlessly to all screen sizes
-4. **Gradient Animations** - Dynamic color-shifting gradients that create a futuristic, tech-forward aesthetic
-5. **Cyberpunk Grid Background** - Subtle grid pattern overlay that reinforces the high-tech theme
-6. **Smooth Transitions** - All interactive elements feature polished hover states and transform effects
+1. **Animated Hero Section** - Eye-catching floating orbs with smooth animations and gradient text effects.
+2. **Interactive Feature Cards** - Hover effects with glow animations.
+3. **Smooth Scrolling** - JavaScript-powered navigation that smoothly glides to sections when links are clicked.
+4. **Scroll Reveal** - Content gently fades in and floats up as you scroll down the page.
+5. **Responsive Grid Layouts** - Adapts seamlessly to all screen sizes.
 
 ## AI Assistance Disclosure
 
 **Yes, AI was used in this project.**
 
-- **Tool:** Claude (Anthropic)
-- **Assistance provided:** Claude helped generate the initial HTML structure, CSS styling concepts, color scheme recommendations, and animation keyframes. It also provided suggestions for the cyberpunk design aesthetic, gradient combinations, and responsive layout patterns.
-- **Human contribution:** All code was reviewed, customized, and refined. Design decisions, final color values, spacing adjustments, and the overall creative direction were determined through iterative refinement.
+- **Tool:** Claude (Anthropic) & Gemini (Google)
+- **Assistance provided:** - **Claude:** Initial HTML structure, CSS styling concepts, color scheme, and animation keyframes.
+  - **Gemini:** Added Authentication UI pages (`login.html`, `signup.html`), implemented the JavaScript for smooth scrolling and scroll reveal animations (`script.js`), and updated the navigation structure.
+- **Human contribution:** Code review, customization of design elements, and final integration of all files.
 
 ## Learning Reflection
 
-Through this project, I deepened my understanding of CSS animations, particularly keyframe animations and complex gradient effects. The most challenging aspect was balancing visual complexity with performance - ensuring animations were smooth while maintaining clean, readable code. I also learned how to create depth using layered blur effects and opacity, which was crucial for achieving the futuristic aesthetic. This project reinforced the importance of thoughtful hover states and transitions in creating an engaging user experience.
+Through this project, I deepened my understanding of CSS animations and how to enhance them with JavaScript. Implementing the smooth scroll manually gave me insight into how single-page navigation works under the hood. I also learned how to use `IntersectionObserver` for efficient scroll-triggered animations instead of relying on heavy scroll event listeners.
 
 ## How to Run
 
-1. Download all files (`index.html`, `style.css`, `README.md`)
+1. Download all files (`index.html`, `login.html`, `signup.html`, `style.css`, `script.js`, `README.md`)
 2. Ensure they are in the same directory
 3. Open `index.html` in any modern web browser
 4. No additional dependencies or server required
 
-## Future Enhancements
+---
 
-- Add JavaScript for smooth scroll animations
-- Implement parallax scrolling effects
-- Add interactive 3D elements using Three.js
-- Create animated particle system background
-- Add form validation for early access signup
+## Pages Added
+
+- **login.html** – A standalone login UI page.
+- **signup.html** – A registration UI page.
+
+## New Features
+
+1.  **Multi-page Navigation**: Seamless linking between Landing, Login, and Signup pages.
+2.  **Smooth Scroll**: Clicking "Watch Demo" now smoothly scrolls to the Features section.
+3.  **Scroll Animations**: Elements fade in as they enter the viewport.
 
 ---
 
