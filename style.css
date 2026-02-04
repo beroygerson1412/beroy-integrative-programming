@@ -527,3 +527,198 @@ body {
 .back-link:hover {
     color: #fff;
 }
+
+/* ... [KEEP ALL PREVIOUS CSS AS IS] ... */
+/* (Previous styles for Hero, Auth, etc. remain unchanged) */
+
+/* ------------------------------------------- */
+/* DASHBOARD & PROFILE STYLES                  */
+/* ------------------------------------------- */
+
+/* Dashboard Navigation */
+.dashboard-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #d1d5db;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #9333ea;
+}
+
+.nav-link.logout {
+    color: #ef4444; /* Red for logout */
+}
+
+.nav-link.logout:hover {
+    color: #f87171;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+    min-height: 100vh;
+    padding: 120px 20px 40px; /* Top padding for navbar space */
+    position: relative;
+    z-index: 10;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Profile Sidebar Card */
+.profile-sidebar {
+    background: rgba(31, 41, 55, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(147, 51, 234, 0.3);
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+    height: fit-content;
+}
+
+.avatar-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 24px;
+    position: relative;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9333ea, #2563eb);
+    padding: 3px; /* Border width */
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #000;
+    border: 3px solid #000;
+}
+
+/* Fallback avatar if no image */
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border: 3px solid #000;
+}
+
+.user-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.user-role {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(147, 51, 234, 0.2);
+    border: 1px solid rgba(147, 51, 234, 0.4);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #d8b4fe;
+    margin-bottom: 24px;
+}
+
+.contact-info {
+    text-align: left;
+    margin-bottom: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-row {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Dashboard Main Content */
+.dashboard-content {
+    background: rgba(31, 41, 55, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(75, 85, 99, 0.4);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.content-header {
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-header h2 {
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+/* Settings Specifics */
+.settings-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.settings-section {
+    margin-bottom: 32px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #d1d5db;
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    accent-color: #9333ea;
+}
+
+/* Responsive Dashboard */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-nav {
+        display: none; /* Hide default nav on mobile if needed, or stack it */
+    }
+    
+    .navbar {
+        justify-content: space-between;
+    }
+}

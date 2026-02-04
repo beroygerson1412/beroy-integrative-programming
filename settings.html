@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - NeuroLink AI</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand gradient-text">NeuroLink AI</a>
+
+      <div class="dashboard-nav">
+        <a href="profile.html" class="nav-link">← Back to Profile</a>
+      </div>
+    </nav>
+
+    <div class="hero-bg">
+      <div class="floating-orb orb-2"></div>
+      <div class="floating-orb orb-3"></div>
+    </div>
+
+    <div class="dashboard-container">
+      <div class="dashboard-content settings-container">
+        <div class="content-header">
+          <h2>Account Settings</h2>
+        </div>
+
+        <form
+          class="auth-form"
+          onsubmit="
+            alert('Settings saved locally! (Visual demo only)');
+            return false;
+          "
+        >
+          <div class="settings-section">
+            <h3 style="color: #9333ea; margin-bottom: 15px">Identity Data</h3>
+
+            <div class="form-group">
+              <label for="change-email">Update Email Address</label>
+              <input
+                type="email"
+                id="change-email"
+                class="form-input"
+                value="alex.cipher@neurolink.ai"
+              />
+              <p style="font-size: 0.8rem; color: #6b7280; margin-top: 5px">
+                This will be synchronized with external identity providers.
+              </p>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px">
+              <label for="change-address">Update Physical Address</label>
+              <input
+                type="text"
+                id="change-address"
+                class="form-input"
+                value="101 Neo-Tokyo District, Sector 7"
+              />
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3 style="color: #2563eb; margin-bottom: 15px">Security</h3>
+
+            <div class="form-group">
+              <label for="new-password">Change Password</label>
+              <input
+                type="password"
+                id="new-password"
+                class="form-input"
+                placeholder="New Password (Argon2id ready)"
+              />
+            </div>
+
+            <div class="form-group" style="margin-top: 15px">
+              <label for="confirm-password">Confirm New Password</label>
+              <input
+                type="password"
+                id="confirm-password"
+                class="form-input"
+                placeholder="Confirm New Password"
+              />
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3 style="color: #ec4899; margin-bottom: 15px">
+              Interface Preferences
+            </h3>
+
+            <div class="form-group">
+              <label for="theme-select">Dashboard Theme</label>
+              <select
+                id="theme-select"
+                class="form-input"
+                style="cursor: pointer"
+              >
+                <option value="cyberpunk">Cyberpunk Dark (Active)</option>
+                <option value="glass">Glassmorphism Light</option>
+                <option value="high-contrast">High Contrast</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 20px">
+            <button type="submit" class="btn-primary btn-full">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -111,3 +111,39 @@ Through this project, I deepened my understanding of CSS animations and how to e
 ---
 
 **Designed for the future. Built with passion.**
+
+---
+
+# ACTIVITY 3 February 4, 2026
+
+## Activity Name
+
+Add Profile + Settings Pages (UI Navigation Challenge)
+
+## Description
+
+This activity involves extending the existing student project by adding a user dashboard with Profile and Settings pages. It simulates a logged-in user experience where users can view their profile details and access a settings form to update their information. The goal is to implement multi-page navigation and maintain a consistent, futuristic UI theme across a dashboard-style layout without using a backend.
+
+## Technologies Used
+
+- **HTML5** - Semantic structure for the dashboard and forms.
+- **CSS3** - Glassmorphism effects, grid layouts for the dashboard, and consistent theming.
+- **JavaScript** - Basic navigation handling (optional) and reused scripts.
+
+## Features
+
+1.  **Dashboard Layout** - A two-column grid layout featuring a sidebar for the profile card and a main content area for user details.
+2.  **Settings Interface** - A dedicated settings page with a visual-only form for updating email, address, password, and theme preferences.
+3.  **Cyclic Navigation** - Full navigation flow connecting Landing → Login → Profile → Settings → Profile → Logout.
+
+## AI Assistance Disclosure
+
+**Yes, AI was used in this project.**
+
+- **Tool:** Gemini (Google)
+- **Assistance provided:** Gemini helped generate the HTML structure for the new `profile.html` and `settings.html` pages. It also provided the CSS for the dashboard grid layout and the specific glassmorphism styles for the sidebar to match the existing cyberpunk theme.
+- **Human contribution:** I reviewed the code, integrated the new CSS into the existing stylesheet, ensured the links worked correctly across all pages, and verified the project structure.
+
+## Learning Reflection
+
+In this activity, I learned how to create a consistent dashboard layout using CSS Grid and Flexbox. The most challenging part was ensuring the navigation links flowed logically between multiple pages (Login -> Profile -> Settings) and maintaining the visual theme of the landing page within a functional application interface.
