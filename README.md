@@ -147,3 +147,38 @@ This activity involves extending the existing student project by adding a user d
 ## Learning Reflection
 
 In this activity, I learned how to create a consistent dashboard layout using CSS Grid and Flexbox. The most challenging part was ensuring the navigation links flowed logically between multiple pages (Login -> Profile -> Settings) and maintaining the visual theme of the landing page within a functional application interface.
+
+---
+
+# ACTIVITY 4 February 10, 2026
+
+## Activity Name
+
+Add Validation Rule
+
+## Description
+
+This activity extends the existing multi-page platform by integrating client-side JavaScript validation. It ensures data integrity on the Login, Signup, and Settings pages by checking email formatting, password length, password matching, and empty fields before allowing the user to proceed with form submission or page navigation.
+
+## Technologies Used
+
+- **JavaScript (Vanilla)** - Used for DOM manipulation, event listening, and Regex email validation.
+- **HTML5 & CSS3** - Used for rendering the input fields and dynamically displaying error states (red borders, text messages).
+
+## Features
+
+1. **Real-Time Error Handling:** Highlights invalid input fields with red borders and injects error messages beneath them instantly.
+2. **Regex Email Validation:** Ensures users input a properly formatted email address containing an `@` symbol and a domain.
+3. **Password Match & Security:** Verifies that passwords meet a minimum character length and that the "Confirm Password" field matches identically.
+
+## AI Assistance Disclosure
+
+**Yes, AI was used in this project.**
+
+- **Tool:** Gemini (Google)
+- **Assistance provided:** Gemini helped write the JavaScript logic for validating the forms. It provided a scalable `validateForm` function using Regex for the email, setup the logic to prevent navigation if fields were invalid, and added dynamic error CSS classes.
+- **Human contribution:** I reviewed the JavaScript logic, tested the forms across the login, signup, and settings pages, ensuring it integrated flawlessly with my specific HTML class names and ID structures, and pushed it to GitHub Pages to verify full functionality.
+
+## Learning Reflection
+
+Through this activity, I learned how to intercept form submissions and link clicks using `event.preventDefault()`. The most challenging part was writing a single JavaScript function that could intelligently identify which form it was validating (e.g., ignoring empty passwords on the Settings page while requiring them on the Signup page) without writing completely separate scripts for every HTML file.
