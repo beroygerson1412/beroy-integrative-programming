@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------
-    // 1. SMOOTH SCROLLING (From Activity 2)
+    // 1. SMOOTH SCROLLING
     // -------------------------------------------
     const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
     smoothScrollLinks.forEach(link => {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // -------------------------------------------
-    // 2. SCROLL REVEAL ANIMATIONS (From Activity 2)
+    // 2. SCROLL REVEAL ANIMATIONS 
     // -------------------------------------------
     const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     // -------------------------------------------
-    // 3. FORM VALIDATION LOGIC (Activity 4)
+    // 3. FORM VALIDATION LOGIC 
     // -------------------------------------------
     const forms = document.querySelectorAll('.auth-form');
 
