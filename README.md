@@ -182,3 +182,38 @@ This activity extends the existing multi-page platform by integrating client-sid
 ## Learning Reflection
 
 Through this activity, I learned how to intercept form submissions and link clicks using event.preventDefault(), gaining practical experience with client-side validation patterns. The most challenging part was architecting a single JavaScript function that could intelligently identify which form it was validating. For example, dynamically distinguishing between authentication flows to ignore empty passwords on the Settings page while strictly requiring them on the Signup page, all without writing completely separate scripts for every HTML file. This required developing a modular validation strategy using form IDs, custom data attributes, and conditional logic to maintain clean, reusable code.
+
+---
+
+# ACTIVITY 5 March 9, 2026
+
+## Activity Name
+
+Create Admin Pages
+
+## Description
+
+This activity introduces admin-side functionality to the platform. It implements role-based routing upon login and provides the system administrator with a dedicated dashboard to oversee platform metrics. Furthermore, it introduces a Data Management interface featuring a fully functional (client-side) CRUD table to add and delete simulated user accounts.
+
+## Technologies Used
+
+- **HTML5 & CSS3** - Used to create a distinct, elevated UI for the admin panels and tables while maintaining the overarching cyberpunk aesthetic.
+- **JavaScript (Vanilla)** - Used to implement conditional login routing (Admin vs. Standard User), DOM manipulation for adding new table rows dynamically, and event delegation for handling item deletions.
+
+## Features
+
+1. **Role-Based Login Routing:** Users logging in with `admin@neurolink.ai` are redirected to the Admin Dashboard, while all other valid emails route to the standard Profile view.
+2. **Interactive Data Table:** A dynamic "Manage Users" table that allows admins to view static database entries and visually delete them from the DOM.
+3. **Dynamic Add Form:** A built-in management form that validates inputs and instantly appends new user data (with randomly generated IDs) directly into the live table.
+
+## AI Assistance Disclosure
+
+**Yes, AI was used in this project.**
+
+- **Tool:** Gemini (Google)
+- **Assistance provided:** Gemini provided the HTML structure for the new `admin.html` and `manage-users.html` pages. It also helped refactor my `script.js` to conditionally route the login button based on the email input value, and wrote the JavaScript DOM manipulation code required to make the "Add User" form and "Delete" buttons functional on the client side.
+- **Human contribution:** I integrated the changes into my local project environment, reviewed the logic to ensure my original validation rules from Activity 4 were preserved, and tested the admin vs user login flow on my live GitHub pages deployment.
+
+## Learning Reflection
+
+This activity gave me an excellent introduction to how real web applications separate standard user privileges from administrative ones. I learned how to use JavaScript to intercept form values and conditionally redirect users (`window.location.href`). I also gained practical experience with DOM manipulation by dynamically creating HTML table rows (`document.createElement`) and handling delete actions using event delegation.
