@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - NeuroLink AI</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand gradient-text"
+        >NeuroLink AI | Admin</a
+      >
+      <div class="dashboard-nav">
+        <a href="admin.html" class="nav-link active">Dashboard</a>
+        <a href="manage-users.html" class="nav-link">Manage Users</a>
+        <a href="login.html" class="nav-link logout">Logout</a>
+      </div>
+    </nav>
+
+    <div class="hero-bg">
+      <div
+        class="floating-orb orb-1"
+        style="background: rgba(239, 68, 68, 0.3)"
+      ></div>
+      <div class="floating-orb orb-3"></div>
+    </div>
+
+    <div class="dashboard-container">
+      <div class="dashboard-grid">
+        <aside
+          class="profile-sidebar"
+          style="border-color: rgba(239, 68, 68, 0.3)"
+        >
+          <div class="avatar-container">
+            <div
+              class="avatar"
+              style="background: linear-gradient(135deg, #ef4444, #9333ea)"
+            >
+              <div class="avatar-placeholder">🛡️</div>
+            </div>
+          </div>
+          <h2 class="user-name">System Admin</h2>
+          <span
+            class="user-role"
+            style="
+              background: rgba(239, 68, 68, 0.2);
+              color: #fca5a5;
+              border-color: rgba(239, 68, 68, 0.4);
+            "
+            >Level 5 Clearance</span
+          >
+          <a
+            href="manage-users.html"
+            class="btn-primary"
+            style="
+              width: 100%;
+              display: block;
+              text-decoration: none;
+              text-align: center;
+              margin-top: 20px;
+            "
+            >Manage Data</a
+          >
+        </aside>
+
+        <main class="dashboard-content">
+          <div class="content-header">
+            <h2>Admin Dashboard</h2>
+          </div>
+
+          <div class="admin-panel">
+            <h3 style="margin-bottom: 10px; color: #fff">Welcome, Admin.</h3>
+            <p style="color: #9ca3af; margin-bottom: 20px">
+              Use the menu to manage system data, oversee neural connections,
+              and moderate user accounts.
+            </p>
+
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+            >
+              <div
+                class="feature-card"
+                style="padding: 20px; background: rgba(0, 0, 0, 0.3)"
+              >
+                <h4 style="color: #93c5fd">Total Users</h4>
+                <p style="font-size: 2rem; font-weight: bold; color: #fff">
+                  1,042
+                </p>
+              </div>
+              <div
+                class="feature-card"
+                style="padding: 20px; background: rgba(0, 0, 0, 0.3)"
+              >
+                <h4 style="color: #4ade80">Active Synapses</h4>
+                <p style="font-size: 2rem; font-weight: bold; color: #fff">
+                  89%
+                </p>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
