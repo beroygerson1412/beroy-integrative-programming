@@ -217,3 +217,44 @@ This activity introduces admin-side functionality to the platform. It implements
 ## Learning Reflection
 
 This activity gave me an excellent introduction to how real web applications separate standard user privileges from administrative ones. I learned how to use JavaScript to intercept form values and conditionally redirect users (`window.location.href`). I also gained practical experience with DOM manipulation by dynamically creating HTML table rows (`document.createElement`) and handling delete actions using event delegation.
+
+---
+
+# ACTIVITY 6 March 16, 2026
+
+## Project Title
+
+Global Intel Scanner (NeuroLink API Integration)
+
+## Description
+
+This application extends the NeuroLink AI platform by allowing users to query a live, external database for geopolitical information. It simulates a futuristic global scanner where users can input the name of a country/region and instantly receive formatted demographic and geographic data.
+
+## API Used
+
+**REST Countries API** (`https://restcountries.com/v3.1/name/`)
+Provides public, free, and secure demographic data (such as capitals, regions, population, and flag images) for countries worldwide.
+
+## Features
+
+- **Live Data Retrieval:** Fetches real-time JSON data from an external API.
+- **Dynamic DOM Rendering:** Constructs and displays a styled "Intel Card" containing the country's flag, capital, population, and region without reloading the page.
+- **Robust Error Handling:** Detects empty inputs, handles 404 "Not Found" API errors (if a user types a fake country), and catches network connection drops, displaying user-friendly error messages on the UI.
+- **Loading States:** Disables the search button and indicates "Scanning Network..." while the asynchronous fetch request is processing.
+
+## How to Use
+
+1. Log in to the application and navigate to the User Profile.
+2. Click the "Launch Scanner" button under the Global Intel feature card to open the API interface.
+3. In the input field, type the name of a country (e.g., "Japan", "Brazil", "France").
+4. Click "Initialize Scan" (or press Enter) to view the API results.
+
+## Challenges Encountered
+
+The main challenge was handling the asynchronous nature of JavaScript (`Promises`). I had to ensure that the UI properly waited for the `fetch()` call to resolve before attempting to read the JSON data. Additionally, gracefully handling errors—such as when a user types gibberish that doesn't exist in the API database—required explicitly checking `!response.ok` to manually throw an error and display it in the custom error box, rather than letting the console crash silently.
+
+## Screenshot
+
+![App Screenshot](assets/screenshot.png) _(Note: Please replace this path with a real screenshot of your Global Intel page working!)_
+
+---
