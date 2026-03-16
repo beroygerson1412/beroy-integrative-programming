@@ -170,4 +170,90 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+// -------------------------------------------
+    // 5. API INTEGRATION LOGIC (Global Intel Scanner)
+    // -------------------------------------------
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('country-search');
+    const errorBox = document.getElementById('api-error');
+    const resultsContainer = document.getElementById('api-results');
+
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', performAPISearch);
+        
+        // Allow user to hit "Enter" to search
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performAPISearch();
+        });
+    }
+
+    function performAPISearch() {
+        const query = searchInput.value.trim();
+        
+        // 1. Reset UI state
+        errorBox.style.display = 'none';
+        resultsContainer.innerHTML = '';
+        
+        // 2. Error Handling: Empty Input
+        if (!query) {
+            showAPIError('Scan failed: Please enter a valid country name.');
+            return;
+        }
+
+        // Update button state to show loading
+        const originalBtnText = searchBtn.innerText;
+        searchBtn.innerText = 'Scanning Network...';
+        searchBtn.disabled = true;
+
+        // 3. API Request (Fetch)
+        fetch(`https://restcountries.com/v3.1/name/${query}?fullText=false`)
+            .then(response => {
+                // 4. Error Handling: API response is not OK (e.g., 404 Not Found)
+                if (!response.ok) {
+                    throw new Error('Entity not found in global database. Check spelling.');
+                }
+                return response.json(); // Process JSON response
+            })
+            .then(data => {
+                // 5. Display the Data
+                const country = data[0]; // Take the first best match
+                
+                // Extracting variables nicely
+                const name = country.name.common;
+                const capital = country.capital ? country.capital[0] : 'N/A';
+                const population = country.population.toLocaleString();
+                const region = country.region;
+                const flagUrl = country.flags.svg;
+
+                // Create the HTML dynamically
+                resultsContainer.innerHTML = `
+                    <div class="api-result-card">
+                        <div class="api-flag">
+                            <img src="${flagUrl}" alt="Flag of ${name}">
+                        </div>
+                        <div class="api-details">
+                            <h3>${name}</h3>
+                            <p><strong>Capital:</strong> ${capital}</p>
+                            <p><strong>Region:</strong> ${region}</p>
+                            <p><strong>Population:</strong> ${population}</p>
+                        </div>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                // Handle network errors or the error thrown above
+                showAPIError(error.message);
+            })
+            .finally(() => {
+                // Revert button state whether it succeeded or failed
+                searchBtn.innerText = originalBtnText;
+                searchBtn.disabled = false;
+            });
+    }
+
+    function showAPIError(message) {
+        errorBox.innerText = message;
+        errorBox.style.display = 'block';
+    }
+
 }); // <--- This was the missing closing bracket and parenthesis!
