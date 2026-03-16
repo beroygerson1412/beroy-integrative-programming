@@ -797,9 +797,7 @@ body {
 .badge-admin { background: rgba(147, 51, 234, 0.2); color: #d8b4fe; border: 1px solid rgba(147, 51, 234, 0.4); }
 .badge-user { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.4); }
 
-/* ------------------------------------------- */
 /* API INTEGRATION (GLOBAL INTEL) STYLES       */
-/* ------------------------------------------- */
 
 .api-search-container {
     display: flex;
