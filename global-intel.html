@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Global Intel - NeuroLink AI</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand gradient-text">NeuroLink AI</a>
+      <div class="dashboard-nav">
+        <a href="profile.html" class="nav-link">← Back to Profile</a>
+        <a href="login.html" class="nav-link logout">Logout</a>
+      </div>
+    </nav>
+
+    <div class="hero-bg">
+      <div class="floating-orb orb-2"></div>
+      <div class="floating-orb orb-3"></div>
+    </div>
+
+    <div class="dashboard-container">
+      <div class="dashboard-content" style="max-width: 800px; margin: 0 auto">
+        <div class="content-header">
+          <h2>Global Intel Scanner</h2>
+          <p style="color: #9ca3af; margin-top: 10px">
+            Access the global database to retrieve live geopolitical and
+            regional data.
+          </p>
+        </div>
+
+        <div class="api-search-container">
+          <input
+            type="text"
+            id="country-search"
+            class="form-input"
+            placeholder="Enter country name (e.g., Japan, Canada)..."
+          />
+          <button id="search-btn" class="btn-primary">Initialize Scan</button>
+        </div>
+
+        <div id="api-error" class="api-error-box"></div>
+
+        <div id="api-results"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
