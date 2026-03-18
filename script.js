@@ -180,8 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (searchBtn && searchInput) {
         searchBtn.addEventListener('click', performAPISearch);
-        
-        // Allow user to hit "Enter" to search
         searchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') performAPISearch();
         });
@@ -189,63 +187,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function performAPISearch() {
         const query = searchInput.value.trim();
-        
-        // 1. Reset UI state
         errorBox.style.display = 'none';
         resultsContainer.innerHTML = '';
         
-        // 2. Error Handling: Empty Input
-        if (!query) {
-            showAPIError('Scan failed: Please enter a valid country name.');
-            return;
-        }
+        if (!query) { showAPIError('Scan failed: Please enter a valid country name.'); return; }
 
-        // Update button state to show loading
         const originalBtnText = searchBtn.innerText;
         searchBtn.innerText = 'Scanning Network...';
         searchBtn.disabled = true;
 
-        // 3. API Request (Fetch)
         fetch(`https://restcountries.com/v3.1/name/${query}?fullText=false`)
             .then(response => {
-                // 4. Error Handling: API response is not OK (e.g., 404 Not Found)
-                if (!response.ok) {
-                    throw new Error('Entity not found in global database. Check spelling.');
-                }
-                return response.json(); // Process JSON response
+                if (!response.ok) throw new Error('Entity not found in global database. Check spelling.');
+                return response.json();
             })
             .then(data => {
-                // 5. Display the Data
-                const country = data[0]; // Take the first best match
+                const country = data[0]; 
                 
-                // Extracting variables nicely
-                const name = country.name.common;
-                const capital = country.capital ? country.capital[0] : 'N/A';
-                const population = country.population.toLocaleString();
-                const region = country.region;
-                const flagUrl = country.flags.svg;
+                // Package the data we want to save
+                const intelData = {
+                    name: country.name.common,
+                    capital: country.capital ? country.capital[0] : 'N/A',
+                    region: country.region,
+                    population: country.population.toLocaleString(),
+                    flagUrl: country.flags.svg
+                };
 
-                // Create the HTML dynamically
                 resultsContainer.innerHTML = `
                     <div class="api-result-card">
                         <div class="api-flag">
-                            <img src="${flagUrl}" alt="Flag of ${name}">
+                            <img src="${intelData.flagUrl}" alt="Flag of ${intelData.name}">
                         </div>
                         <div class="api-details">
-                            <h3>${name}</h3>
-                            <p><strong>Capital:</strong> ${capital}</p>
-                            <p><strong>Region:</strong> ${region}</p>
-                            <p><strong>Population:</strong> ${population}</p>
+                            <h3>${intelData.name}</h3>
+                            <p><strong>Capital:</strong> ${intelData.capital}</p>
+                            <p><strong>Region:</strong> ${intelData.region}</p>
+                            <p><strong>Population:</strong> ${intelData.population}</p>
+                            
+                            <button id="save-intel-btn" class="btn-primary" style="margin-top: 15px; background: #2563eb; border-color: #3b82f6;">
+                                💾 Save to Local Database
+                            </button>
                         </div>
                     </div>
                 `;
+
+                // Attach event listener to the newly created Save Button
+                document.getElementById('save-intel-btn').addEventListener('click', () => {
+                    saveIntelToLocal(intelData);
+                });
             })
-            .catch(error => {
-                // Handle network errors or the error thrown above
-                showAPIError(error.message);
-            })
+            .catch(error => showAPIError(error.message))
             .finally(() => {
-                // Revert button state whether it succeeded or failed
                 searchBtn.innerText = originalBtnText;
                 searchBtn.disabled = false;
             });
@@ -256,4 +248,82 @@ document.addEventListener('DOMContentLoaded', () => {
         errorBox.style.display = 'block';
     }
 
-}); // <--- This was the missing closing bracket and parenthesis!
+    // -------------------------------------------
+    // 6. LOCALSTORAGE LOGIC (Save, Load, Delete)
+    // -------------------------------------------
+    
+    // Function to Save Data
+    function saveIntelToLocal(data) {
+        // 1. Get existing data or create an empty array
+        let savedItems = JSON.parse(localStorage.getItem('neurolink_saved_intel')) || [];
+
+        // 2. Prevent Duplicates (Check by country name)
+        const isDuplicate = savedItems.some(item => item.name === data.name);
+        
+        if (isDuplicate) {
+            alert(`⚠️ Alert: "${data.name}" is already saved in your database.`);
+            return;
+        }
+
+        // 3. Add new data and save back to localStorage
+        savedItems.push(data);
+        localStorage.setItem('neurolink_saved_intel', JSON.stringify(savedItems));
+        
+        // 4. Show success message
+        alert(`✅ Success: "${data.name}" intel secured in local database.`);
+    }
+
+    // Function to Load Data on the Saved Items Page
+    const savedGrid = document.getElementById('saved-intel-grid');
+    if (savedGrid) {
+        loadSavedIntel();
+    }
+
+    function loadSavedIntel() {
+        let savedItems = JSON.parse(localStorage.getItem('neurolink_saved_intel')) || [];
+        savedGrid.innerHTML = ''; // Clear grid
+
+        // Bonus: Empty State
+        if (savedItems.length === 0) {
+            savedGrid.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;">No intel data saved yet. Access the scanner to retrieve and save data.</div>`;
+            return;
+        }
+
+        // Render saved items
+        savedItems.forEach((item, index) => {
+            savedGrid.innerHTML += `
+                <div class="saved-card" data-index="${index}">
+                    <div class="saved-header">
+                        <img src="${item.flagUrl}" alt="Flag">
+                        <h4>${item.name}</h4>
+                    </div>
+                    <div class="saved-body">
+                        <p><strong>Capital:</strong> ${item.capital}</p>
+                        <p><strong>Region:</strong> ${item.region}</p>
+                        <p><strong>Pop:</strong> ${item.population}</p>
+                    </div>
+                    <button class="btn-small btn-danger delete-saved-btn" style="margin-top: 10px;">Remove Intel</button>
+                </div>
+            `;
+        });
+
+        // Attach event listeners to all delete buttons
+        document.querySelectorAll('.delete-saved-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const index = e.target.closest('.saved-card').getAttribute('data-index');
+                deleteSavedIntel(index);
+            });
+        });
+    }
+
+    // Function to Delete Data
+    function deleteSavedIntel(index) {
+        let savedItems = JSON.parse(localStorage.getItem('neurolink_saved_intel')) || [];
+        // Remove 1 item at the specific index
+        savedItems.splice(index, 1);
+        // Resave and reload the UI
+        localStorage.setItem('neurolink_saved_intel', JSON.stringify(savedItems));
+        loadSavedIntel(); 
+    }
+
+}); // <--- ENSURE THIS FINAL CLOSING BRACKET STAYS AT THE VERY BOTTOM OF SCRIPT.JS
