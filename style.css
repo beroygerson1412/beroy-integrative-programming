@@ -865,3 +865,63 @@ body {
         flex-direction: column;
     }
 }
+
+/* ------------------------------------------- */
+/* SAVED INTEL (LOCALSTORAGE) STYLES           */
+/* ------------------------------------------- */
+
+.saved-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.saved-card {
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.saved-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+}
+
+.saved-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.saved-header img {
+    width: 60px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.saved-header h4 {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.saved-body p {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #9ca3af;
+    font-style: italic;
+}
