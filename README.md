@@ -255,6 +255,6 @@ The main challenge was handling the asynchronous nature of JavaScript (`Promises
 
 ## Screenshot
 
-![App Screenshot](assets/screenshot.png) _(Note: Please replace this path with a real screenshot of your Global Intel page working!)_
+![App Screenshot](assets/screenshot.png)
 
 ---
