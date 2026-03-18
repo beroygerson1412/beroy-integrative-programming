@@ -256,6 +256,5 @@ The main challenge was handling the asynchronous nature of JavaScript (`Promises
 ## Screenshot
 
 ![App Screenshot](assets/screenshot.png)
-![Another Screenshot](assets/another_screenshot.png)
 
 ---
