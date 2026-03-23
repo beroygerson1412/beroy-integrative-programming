@@ -327,63 +327,72 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------
-    // 7. API REFINEMENT: Cognitive Download Module (Dictionary API)
+    // 7. API REFINEMENT: Orbital Surveillance Network (Spaceflight News API)
     // -------------------------------------------
-    const wordBtn = document.getElementById('word-btn');
-    const wordInput = document.getElementById('word-search');
-    const wordError = document.getElementById('word-error');
-    const wordResultsContainer = document.getElementById('word-results');
+    const orbitBtn = document.getElementById('refresh-orbit-btn');
+    const orbitError = document.getElementById('orbit-error');
+    const orbitLoading = document.getElementById('orbit-loading');
+    const orbitResults = document.getElementById('orbit-results');
 
-    if (wordBtn && wordInput) {
-        wordBtn.addEventListener('click', performWordDownload);
-        wordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performWordDownload();
-        });
+    // Auto-load the feed if we are on the Orbital Network page
+    if (orbitResults) {
+        fetchOrbitalTransmissions();
+        
+        if (orbitBtn) {
+            orbitBtn.addEventListener('click', fetchOrbitalTransmissions);
+        }
     }
 
-    function performWordDownload() {
-        const word = wordInput.value.trim();
-        wordError.style.display = 'none';
-        wordResultsContainer.innerHTML = '';
-        
-        if (!word) { 
-            wordError.innerText = 'Download failed: Data stream requires a valid input parameter.';
-            wordError.style.display = 'block';
-            return; 
-        }
+    function fetchOrbitalTransmissions() {
+        // Reset UI
+        orbitError.style.display = 'none';
+        orbitResults.innerHTML = '';
+        orbitLoading.style.display = 'block';
+        if (orbitBtn) orbitBtn.disabled = true;
 
-        const originalText = wordBtn.innerText;
-        wordBtn.innerText = 'Establishing Neural Link...';
-        wordBtn.disabled = true;
-
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+        // Fetch the 5 latest space news articles
+        fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=5')
             .then(response => {
-                if (!response.ok) throw new Error('Concept not found in linguistic database. Term may not exist.');
+                if (!response.ok) throw new Error('Satellite uplink failed. Unable to retrieve telemetry data.');
                 return response.json();
             })
             .then(data => {
-                const result = data[0];
-                const meaning = result.meanings[0]; // Get the first part of speech
-                const definition = meaning.definitions[0].definition;
-                const phonetic = result.phonetic || 'Audio data unavailable';
+                const articles = data.results;
                 
-                wordResultsContainer.innerHTML = `
-                    <div class="api-result-card" style="grid-template-columns: 1fr; border-color: rgba(147, 51, 234, 0.5);">
-                        <div class="api-details">
-                            <h3 style="color: #d8b4fe; font-size: 2.5rem; margin-bottom: 5px;">${result.word}</h3>
-                            <p style="color: #a78bfa; font-style: italic; margin-bottom: 15px;">[ ${phonetic} ] • ${meaning.partOfSpeech}</p>
-                            <p style="font-size: 1.2rem; line-height: 1.6; color: #e5e7eb;"><strong>Definition:</strong> ${definition}</p>
+                if (articles.length === 0) {
+                    throw new Error('No active transmissions found in orbit.');
+                }
+
+                articles.forEach(article => {
+                    // Format the date nicely
+                    const dateObj = new Date(article.published_at);
+                    const formattedDate = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString();
+
+                    orbitResults.innerHTML += `
+                        <div class="api-result-card" style="grid-template-columns: 200px 1fr; border-color: rgba(16, 185, 129, 0.4); align-items: start;">
+                            <div class="api-flag" style="height: 100%;">
+                                <img src="${article.image_url}" alt="Transmission Image" style="height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="api-details">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span style="color: #6ee7b7; font-size: 0.8rem; font-weight: bold; text-transform: uppercase;">Source: ${article.news_site}</span>
+                                    <span style="color: #9ca3af; font-size: 0.8rem;">${formattedDate}</span>
+                                </div>
+                                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 10px;">${article.title}</h3>
+                                <p style="color: #d1d5db; font-size: 1rem; line-height: 1.5; margin-bottom: 15px;">${article.summary}</p>
+                                <a href="${article.url}" target="_blank" class="btn-small" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7; text-decoration: none; display: inline-block;">Decrypt Full Log ↗</a>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                });
             })
             .catch(error => {
-                wordError.innerText = error.message;
-                wordError.style.display = 'block';
+                orbitError.innerText = error.message;
+                orbitError.style.display = 'block';
             })
             .finally(() => {
-                wordBtn.innerText = originalText;
-                wordBtn.disabled = false;
+                orbitLoading.style.display = 'none';
+                if (orbitBtn) orbitBtn.disabled = false;
             });
-    }
+    }    
 }); // <--- ENSURE THIS FINAL CLOSING BRACKET STAYS AT THE VERY BOTTOM OF SCRIPT.JS
