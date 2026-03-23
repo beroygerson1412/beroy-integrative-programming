@@ -326,4 +326,64 @@ document.addEventListener('DOMContentLoaded', () => {
         loadSavedIntel(); 
     }
 
+    // -------------------------------------------
+    // 7. API REFINEMENT: Cognitive Download Module (Dictionary API)
+    // -------------------------------------------
+    const wordBtn = document.getElementById('word-btn');
+    const wordInput = document.getElementById('word-search');
+    const wordError = document.getElementById('word-error');
+    const wordResultsContainer = document.getElementById('word-results');
+
+    if (wordBtn && wordInput) {
+        wordBtn.addEventListener('click', performWordDownload);
+        wordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performWordDownload();
+        });
+    }
+
+    function performWordDownload() {
+        const word = wordInput.value.trim();
+        wordError.style.display = 'none';
+        wordResultsContainer.innerHTML = '';
+        
+        if (!word) { 
+            wordError.innerText = 'Download failed: Data stream requires a valid input parameter.';
+            wordError.style.display = 'block';
+            return; 
+        }
+
+        const originalText = wordBtn.innerText;
+        wordBtn.innerText = 'Establishing Neural Link...';
+        wordBtn.disabled = true;
+
+        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Concept not found in linguistic database. Term may not exist.');
+                return response.json();
+            })
+            .then(data => {
+                const result = data[0];
+                const meaning = result.meanings[0]; // Get the first part of speech
+                const definition = meaning.definitions[0].definition;
+                const phonetic = result.phonetic || 'Audio data unavailable';
+                
+                wordResultsContainer.innerHTML = `
+                    <div class="api-result-card" style="grid-template-columns: 1fr; border-color: rgba(147, 51, 234, 0.5);">
+                        <div class="api-details">
+                            <h3 style="color: #d8b4fe; font-size: 2.5rem; margin-bottom: 5px;">${result.word}</h3>
+                            <p style="color: #a78bfa; font-style: italic; margin-bottom: 15px;">[ ${phonetic} ] • ${meaning.partOfSpeech}</p>
+                            <p style="font-size: 1.2rem; line-height: 1.6; color: #e5e7eb;"><strong>Definition:</strong> ${definition}</p>
+                        </div>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                wordError.innerText = error.message;
+                wordError.style.display = 'block';
+            })
+            .finally(() => {
+                wordBtn.innerText = originalText;
+                wordBtn.disabled = false;
+            });
+    }
 }); // <--- ENSURE THIS FINAL CLOSING BRACKET STAYS AT THE VERY BOTTOM OF SCRIPT.JS
